@@ -1,11 +1,12 @@
 import React from 'react'
+import Prototypes from 'prop-types'
 
-export default function Header() {
+export default function Header(props) {
     return (
         <div>
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
                 <div className="container-fluid">
-                    <a className="navbar-brand" href="#">React App Practice</a>
+                    <a className="navbar-brand" href="#">{props.title} {props.extra}</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
@@ -18,13 +19,30 @@ export default function Header() {
                                 <a className="nav-link" href="#">About</a>
                             </li>
                         </ul>
-                        <form className="d-flex" role="search">
-                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                            <button className="btn btn-outline-success" type="submit">Search</button>
-                        </form>
+                        {props.searchbar? 
+                            <form className="d-flex" role="search">
+                                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                                <button className="btn btn-outline-success" type="submit">Search</button>
+                            </form>
+                         : <form className="d-flex" role="search">
+                                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"disabled />
+                                <button className="btn btn-outline-success" type="submit" disabled>Search</button>
+                            </form>}
                     </div>
                 </div>
             </nav>
         </div>
     )
+}
+
+Header.defaultrops = {
+    title: "My Default Title",
+    extra:"My Default Extra",
+    searchbar: true
+}
+
+Header.placeholder = {
+    title: Prototypes.string,
+    extra: Prototypes.string,
+    searchbar: Prototypes.bool
 }
